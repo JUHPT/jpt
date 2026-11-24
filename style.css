@@ -1,0 +1,240 @@
+/* style.css */
+:root {
+  --ink: #243e36;
+  --green: #234f43;
+  --paper: #f6f1e5;
+  --cream: #fffaf0;
+  --yellow: #ffda84;
+  --wood: #b78052;
+  --line: #c9c2ae;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 17px/1.55 system-ui, "Malgun Gothic", sans-serif;
+}
+
+main {
+  max-width: 850px;
+  margin: auto;
+  padding: 28px 16px;
+}
+
+header, footer, .heading, .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+header {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 10px;
+  font-weight: 750;
+}
+
+footer {
+  margin-top: 22px;
+  color: #526158;
+  font-size: 14px;
+}
+
+section { margin-top: 20px; }
+h1, h2, h3, p { margin: 0 0 12px; }
+
+.board {
+  padding: clamp(24px, 6vw, 54px);
+  background: var(--green);
+  border: 8px solid #a87b53;
+  border-radius: 10px;
+  color: var(--cream);
+  box-shadow: 0 5px 0 #ded1bc;
+}
+
+.chalk, .board em { color: var(--yellow); }
+.board em { font-style: normal; }
+
+h1 {
+  font-size: clamp(42px, 8vw, 76px);
+  line-height: 1.12;
+  letter-spacing: -0.065em;
+  margin-bottom: 20px;
+}
+
+.buttons { justify-content: flex-start; }
+
+button {
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--cream);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button.primary {
+  background: var(--yellow);
+  border-color: #b89249;
+}
+
+button:focus-visible {
+  outline: 3px solid #1670a1;
+  outline-offset: 2px;
+}
+
+button:disabled { cursor: default; }
+#timer { font-variant-numeric: tabular-nums; }
+
+.panel, .notice {
+  padding: 18px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.notice { min-height: 56px; }
+
+.classroom {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 18px;
+  margin: 14px 0;
+  background: repeating-linear-gradient(
+    #eee0cb 0 40px, #e6d6bf 40px 42px
+  );
+  border-radius: 12px;
+}
+
+.seat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 138px;
+  padding: 5px;
+  background: transparent;
+  border: 2px solid transparent;
+}
+
+.seat:not(:disabled):hover { background: #ffffff65; }
+.seat.selected { border-color: var(--green); }
+.seat.correct { background: #d6ead2; }
+
+.person {
+  font-size: clamp(40px, 7vw, 65px);
+  line-height: 1.1;
+}
+
+.desk {
+  width: 90%;
+  background: var(--wood);
+  color: #211b15;
+  border: 2px solid #78533a;
+  border-bottom-width: 6px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.clue {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  z-index: 1;
+  padding: 2px 6px;
+  background: #fff4c5;
+  border: 2px solid #806946;
+  border-radius: 8px;
+  font-size: clamp(12px, 2vw, 17px);
+}
+
+.seat.acting .person { transform: rotate(7deg); }
+
+.writing {
+  display: grid;
+  place-items: center;
+  min-height: 324px;
+  margin: 14px 0;
+  text-align: center;
+}
+
+.eyebrow { color: #627267; }
+.big-score { font-size: 40px; font-weight: 850; }
+#round-records { padding-left: 25px; }
+#round-records li { margin-bottom: 5px; }
+[hidden] { display: none !important; }
+
+@media (max-width: 520px) {
+  main { padding: 16px 10px; }
+  .classroom { gap: 3px; padding: 6px; }
+  .seat { height: 110px; }
+  .desk { width: 100%; }
+  .writing { min-height: 235px; }
+  /* 학생 6명이 담긴 그림에서 한 자리만 보여준다. */
+.person.student-image {
+  display: block;
+  width: min(88px, 100%);
+  aspect-ratio: 1;
+  flex-shrink: 0;
+
+  background-image: url("images/students.png");
+  background-size: 300% 200%;
+  background-repeat: no-repeat;
+  border-radius: 10px 10px 0 0;
+}
+
+/* 윗줄 왼쪽부터 1, 2, 3번 학생 */
+.student-1 { background-position: 0% 0%; }
+.student-2 { background-position: 50% 0%; }
+.student-3 { background-position: 100% 0%; }
+
+/* 아랫줄 왼쪽부터 4, 5, 6번 학생 */
+.student-4 { background-position: 0% 100%; }
+.student-5 { background-position: 50% 100%; }
+.student-6 { background-position: 100% 100%; }
+
+@media (max-width: 520px) {
+  .person.student-image {
+    width: min(68px, 100%);
+  }
+}
+/* 행동을 입력해 둔 자리 */
+.seat.recorded {
+  border-color: #94753c;
+  background: #fff1cd;
+}
+
+/* 현재 수정하고 있는 자리 */
+.seat.selected {
+  outline: 3px solid var(--green);
+  outline-offset: -3px;
+}
+
+/* 선택한 자리와 행동을 책상 위에 표시 */
+.seat-note {
+  margin-bottom: 6px;
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.answer-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.round-review {
+  margin: 8px 0 16px;
+  padding-left: 24px;
+}
+}

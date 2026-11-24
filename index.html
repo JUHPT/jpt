@@ -1,0 +1,73 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교수님, 뒤를 보세요!</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <span>강의실 관찰 게임</span>
+      <span>교수님 시점</span>
+    </header>
+
+    <section id="home" class="board">
+      <p class="chalk">오늘의 수업 · 관찰 실습</p>
+      <h1>교수님,<br><em>뒤를 보세요!</em></h1>
+      <p>
+        딴짓한 학생의 자리와 행동을 기억하세요.<br>
+        1교시는 1명으로 시작하고, 교시가 올라갈 때마다 한 명씩 늘어납니다.
+      </p>
+      <div class="buttons">
+        <button id="practice" class="primary">연습 수업</button>
+        <button id="start">바로 시작</button>
+      </div>
+    </section>
+
+    <section id="game" hidden>
+      <div class="heading">
+        <h2 id="round-title"></h2>
+        <span id="timer"></span>
+      </div>
+
+      <p id="message" class="notice" role="status"></p>
+
+      <div id="classroom" class="classroom" aria-label="학생 좌석"></div>
+
+      <div id="blackboard" class="board writing" hidden>
+        <span>교수님이 칠판에 판서 중입니다…</span>
+      </div>
+
+      <div id="action-panel" class="panel" hidden>
+        <h3 id="action-title"></h3>
+        <div id="action-buttons" class="buttons"></div>
+      </div>
+
+      <div id="answer-panel" class="panel" hidden>
+        <h3 id="answer-title"></h3>
+        <p id="answer-detail"></p>
+        <p id="my-answer"></p>
+        <button id="next" class="primary">다음 교시</button>
+      </div>
+    </section>
+
+    <section id="result" class="panel" hidden>
+      <p class="eyebrow">수업 종료</p>
+      <h2>오늘의 관찰 기록</h2>
+      <p id="final-score" class="big-score"></p>
+      <p id="final-summary"></p>
+      <ol id="round-records"></ol>
+      <button id="restart" class="primary">다시 수업하기</button>
+    </section>
+
+    <footer>
+      <span>총 4교시 · 최종 20점 만점</span>
+      <span id="score">출석 인원 6명</span>
+    </footer>
+  </main>
+</body>
+</html>
